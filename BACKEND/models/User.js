@@ -9,15 +9,14 @@ const userSchema = new Schema({
         type : String,
         required: true
     },
-    nicno: {
-        type: String,
-        required: true
-    },
     address:{
         type:String,
     },
     contactno: {
         type: Number,
+    },
+    gender:{
+        type:String,
     },
     institute:{
         type:String,
@@ -25,15 +24,15 @@ const userSchema = new Schema({
     qulification:{
         type:String,
     },
+    subject:{
+        type:String,
+    },
+    grade:{
+        type:String,
+    },
     email:{
         type:String,
         required:true
-    },
-    date:{
-      type:Date
-    },
-    time:{
-      type:String
     },
     username:{
         type:String,
