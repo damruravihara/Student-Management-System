@@ -33,6 +33,14 @@ const Profile = props=>{
     <div className="border border-primary">
       <br/>
 
+      <div>
+      <Link to={"/user/update/" + user._id} >
+      <button type="button" 
+              className="btn btn-outline-success" 
+              >Update Profile</button> </Link>
+    </div>
+    <br/>
+
       <table className="table">
         <tbody>
           <tr>

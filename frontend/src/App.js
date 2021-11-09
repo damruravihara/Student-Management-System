@@ -6,6 +6,8 @@ import Header from "./components/Header/Header";
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
+import Updateprofile from './components/Updateprofile';
+import Allusers from './components/Allusers';
 
 
 
@@ -23,6 +25,8 @@ function App() {
         <Route path="/user/login" component={Login}/>
         <Route path="/user/register" component={Register}/>
         <Route path="/user/profile" component={Profile}/>
+        <Route path="/user/update/:id" component={Updateprofile}/>
+        <Route path="/admin/alluser" component={Allusers}/>
       </div>
     </Router>
     

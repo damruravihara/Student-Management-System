@@ -3,6 +3,7 @@ const JWT = require('jsonwebtoken');
 const passport = require('passport');
 const passportConfig = require('../passport');
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
 const signToken = userID => {
   return JWT.sign({
@@ -118,5 +119,58 @@ userRouter.get('/userprofile',passport.authenticate('jwt',{session : false}),(re
    .catch(err => res.status(404).json(err));  
 });
 
+userRouter.route("/userupdate/:id").put(async(req,res)=>{
+  let userID = req.params.id;
+  //const supplier = await Supplier.findById(req.user._id);
+  //destructor
+  const{name,address,contactno,gender,institute,qulification,subject,grade,email} = req.body;
+
+  const updateUser = {
+    name,
+    address,
+    contactno,
+    gender,
+    institute,
+    qulification,
+    subject,
+    grade,
+    email
+  }
+  try{
+      await User.findByIdAndUpdate(userID,updateUser).exec();
+      res.status(200).send({status:"User updated"})
+  }
+  catch(err){
+      res.status(500).send({status:"Error with updating data", error: err.message});
+  }
+  
+})
+
+userRouter.get('/alluser',passport.authenticate('jwt',{session:false}),(req,res)=>{
+  if(req.user.role === 'admin'){
+      User.find().then((user)=>{
+          res.json(user)
+      }).catch((err)=>{
+          console.log(err);
+      })
+  }
+  else
+  res.status(403).json({message : {msgBody : "You'r not an admin", msgError : true}});
+  
+});
+
+userRouter.route("/delete/:id").delete(async(req,res)=>{
+  let id = req.params.id;
+
+
+  try {
+      await User.findByIdAndRemove(id).exec();
+      res.send('Succesfully Deleted')
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+});
 
 module.exports = userRouter;
