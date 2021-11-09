@@ -9,15 +9,14 @@ const userSchema = new Schema({
         type : String,
         required: true
     },
-    nicno: {
-        type: String,
-        required: true
-    },
     address:{
         type:String,
     },
     contactno: {
         type: Number,
+    },
+    gender:{
+        type:String,
     },
     institute:{
         type:String,
@@ -25,15 +24,15 @@ const userSchema = new Schema({
     qulification:{
         type:String,
     },
+    subject:{
+        type:String,
+    },
+    grade:{
+        type:String,
+    },
     email:{
         type:String,
         required:true
-    },
-    date:{
-      type:Date
-    },
-    time:{
-      type:String
     },
     username:{
         type:String,
@@ -54,6 +53,21 @@ const userSchema = new Schema({
 
 //check password is dcrypted before save password
 userSchema.pre('save',function(next){
+    if(!this.isModified('password'))
+        return next();
+    
+    bcrypt.hash(this.password,10,(err,passwordHash)=>{
+        if(err)
+        return next(err);
+        this.password = passwordHash;
+        next();
+    });
+
+});
+
+
+
+userSchema.pre('update',function(next){
     if(!this.isModified('password'))
         return next();
     

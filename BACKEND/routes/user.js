@@ -3,6 +3,7 @@ const JWT = require('jsonwebtoken');
 const passport = require('passport');
 const passportConfig = require('../passport');
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
 const signToken = userID => {
   return JWT.sign({
@@ -14,7 +15,9 @@ const signToken = userID => {
 
 userRouter.route('/Tregister').post((req,res)=>{
 
-  const {name,nicno,address,contactno,institute,qulification,email,date,time,username,password,role} = req.body;
+  const {name,address,contactno,gender,institute,qulification,subject,grade,email,username,password} = req.body;
+  role = "user";
+
 
   User.findOne({username},(err,user)=>{
     if(err)
@@ -22,7 +25,7 @@ userRouter.route('/Tregister').post((req,res)=>{
     if(user)
     res.status(400).json({message : {msgBody : "Username is already taken", msgError: true}});
     else{
-      const newUser = new User({name,nicno,address,contactno,institute,qulification,email,date,time,username,password,role});
+      const newUser = new User({name,address,contactno,gender,institute,qulification,subject,grade,email,username,password,role});
       newUser.save(err=>{
           if(err)
           res.status(500).json({message : {msgBody : "Error has occured ", msgError: true}});
@@ -37,7 +40,7 @@ userRouter.route('/Tregister').post((req,res)=>{
 
 userRouter.route('/Aregister').post((req,res)=>{
 
-  const {name,nicno,email,username,password,role} = req.body;
+  const {name,email,username,password,role} = req.body;
 
   User.findOne({username},(err,user)=>{
     if(err)
@@ -45,7 +48,7 @@ userRouter.route('/Aregister').post((req,res)=>{
     if(user)
     res.status(400).json({message : {msgBody : "Username is already taken", msgError: true}});
     else{
-      const newUser = new User({name,nicno,email,username,password,role});
+      const newUser = new User({name,email,username,password,role});
       newUser.save(err=>{
           if(err)
           res.status(500).json({message : {msgBody : "Error has occured ", msgError: true}});
@@ -92,5 +95,82 @@ userRouter.get('/alluser',passport.authenticate('jwt',{session:false}),(req,res)
   
 });
 
+userRouter.get('/userauthenticated',passport.authenticate('jwt',{session:false}),(req,res)=>{
+  const {username,role} = req.user;
+  res.status(200).json({isAuthenticated : true, user : {username,role}});  
+});
+
+//user Profile
+userRouter.get('/userprofile',passport.authenticate('jwt',{session : false}),(req,res)=>{
+
+  // let userID = req.params.id;
+  // const {name,nicno,address,contactno,companyname,raw,description,email,username,password,role} = req.body;
+
+       User.findById({_id : req.user._id}).then(user=>{
+       
+       if(!user){
+           error.nonprofile = 'There is no profile for this user';
+           return res.status(404).json(errors);
+
+       }if(user){
+       res.json(user);
+       }
+   })
+   .catch(err => res.status(404).json(err));  
+});
+
+userRouter.route("/userupdate/:id").put(async(req,res)=>{
+  let userID = req.params.id;
+  //const supplier = await Supplier.findById(req.user._id);
+  //destructor
+  const{name,address,contactno,gender,institute,qulification,subject,grade,email} = req.body;
+
+  const updateUser = {
+    name,
+    address,
+    contactno,
+    gender,
+    institute,
+    qulification,
+    subject,
+    grade,
+    email
+  }
+  try{
+      await User.findByIdAndUpdate(userID,updateUser).exec();
+      res.status(200).send({status:"User updated"})
+  }
+  catch(err){
+      res.status(500).send({status:"Error with updating data", error: err.message});
+  }
+  
+})
+
+userRouter.get('/alluser',passport.authenticate('jwt',{session:false}),(req,res)=>{
+  if(req.user.role === 'admin'){
+      User.find().then((user)=>{
+          res.json(user)
+      }).catch((err)=>{
+          console.log(err);
+      })
+  }
+  else
+  res.status(403).json({message : {msgBody : "You'r not an admin", msgError : true}});
+  
+});
+
+userRouter.route("/delete/:id").delete(async(req,res)=>{
+  let id = req.params.id;
+
+
+  try {
+      await User.findByIdAndRemove(id).exec();
+      res.send('Succesfully Deleted')
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+});
 
 module.exports = userRouter;
