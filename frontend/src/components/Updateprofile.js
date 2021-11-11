@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 export default function Updateprofile(){
 
@@ -83,21 +84,24 @@ if(e!=null){
   return(
     <>
     <br/>
-
+<div className="container">
+  <br/>
 <form className="needs-validation" noValidate>
         <div className="row g-2">
-          <div className="col-md-6">
-            <input type="text" className="form-control" {...register("name", { maxLength: 20 })} id="name" placeholder="Name" defaultValue={user.name}
+          <div className="col-md-6 form-floating">
+            <input type="text" className="form-control logininput" {...register("name", { maxLength: 20 })} id="name" defaultValue={user.name}
               onChange={(e) => {setName(e.target.value);
               }} required/>
+              <label for="floatingInput">Name</label>
               {errors?.name?.type === "maxLength" && (<p>*Name cannot exceed 20 characters</p> )}
           </div>
 
-          <div className="col-md-6">
-                    <input type="number" {...register("contactno", { minLength:10, maxLength:12 })} className="form-control" id="contactno" placeholder="Contact Number" defaultValue={user.contactno}
+          <div className="col-md-6 form-floating">
+                    <input type="number" {...register("contactno", { minLength:10, maxLength:12 })} className="form-control logininput" id="contactno" defaultValue={user.contactno}
                       onChange={(e) => {
                         setContactNo(e.target.value);
                       } } required/>
+                      <label for="floatingInput">Contact Number</label>
                       {errors?.contactno?.type === "minLength" && (<p className="damrureq">*Contact No must be contain Min 10 numbers</p>)}
                       {errors?.contactno?.type === "maxLength" && (<p className="damrureq">*Contact No must be contain Max 12 numbers</p>)}
                   </div>
@@ -105,69 +109,86 @@ if(e!=null){
 
         <br/>
         <div className="row g-2">
-          <div className="col-md-6">
-            <input type="text" className="form-control" {...register("gender")} id="gender" placeholder="Gender" defaultValue={user.gender}
+          <div className="col-md-6 form-floating">
+            {/* <input type="text" className="form-control logininput" {...register("gender")} id="gender" placeholder="Gender" defaultValue={user.gender}
               onChange={(e) => {setGender(e.target.value);
-              }} required/>
-             
+              }} required/> */}
+
+              <select class="form-control logininput"  onChange={(e) => {setGender(e.target.value);
+              }} required>
+                  <option>{user.gender}</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  </select> 
+
+             <label for="floatingInput">Gender</label>
           </div>
 
-          <div className="col-md-6">
-                    <input type="text" className="form-control" id="institute" placeholder="Institute Name" defaultValue={user.institute}
+          <div className="col-md-6 form-floating">
+                    <input type="text" className="form-control logininput" id="institute" defaultValue={user.institute}
                       onChange={(e) => {
                         setInstitute(e.target.value);
                       } } required/>
+                      <label for="floatingInput">Institute Name</label>
                   </div>
         </div>
         <br/>
         <div className="row g-2">
-          <div className="col-md-6">
-            <textarea rows="3" className="form-control" id="address" placeholder="Address" defaultValue={user.address}
+          <div className="col-md-6 form-floating">
+            <textarea rows="3" className="form-control logininput" id="address" defaultValue={user.address}
               onChange={(e) => {setAddress(e.target.value);
               }} required/>
+              <label for="floatingInput">Address</label>
              
           </div>
 
-          <div className="col-md-6">
-                    <textarea className="form-control" rows="3" id="qulification" placeholder="Qulifications" defaultValue={user.qulification}
+          <div className="col-md-6 form-floating">
+                    <textarea className="form-control logininput" rows="3" id="qulification" defaultValue={user.qulification}
                       onChange={(e) => {
                         setQulification(e.target.value);
                       } } required/>
+                      <label for="floatingInput">Qulifications</label>
                   </div>
         </div>
 
         <br/>
         <div className="row g-2">
-          <div className="col-md-6">
-            <input type="text" className="form-control" id="subject" placeholder="Subjects" defaultValue={user.subject}
+          <div className="col-md-6 form-floating">
+            <input type="text" className="form-control logininput" id="subject" defaultValue={user.subject}
               onChange={(e) => {setSubject(e.target.value);
               }} required/>
+              <label for="floatingInput">Subjects</label>
              
           </div>
 
-          <div className="col-md-6">
-                    <input type="text" className="form-control" id="grade" placeholder="Grade" defaultValue={user.grade}
+          <div className="col-md-6 form-floating">
+                    <input type="text" className="form-control logininput" id="grade" defaultValue={user.grade}
                       onChange={(e) => {
                         setGrade(e.target.value);
                       } } required/>
+                      <label for="floatingInput">Grade</label>
                   </div>
         </div>
 
         <br/>
 
-        <div className="col-md-6">
-                    <input type="text" className="form-control" {...register("email",{ pattern:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/})} id="email" placeholder="Email Address" defaultValue={user.email}
+        <div className="col-md-6 form-floating">
+                    <input type="text" className="form-control logininput" {...register("email",{ pattern:/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/})} id="email" defaultValue={user.email}
                       onChange={(e) => {
                         setEmail(e.target.value);
                       } } required/>
+                      <label for="floatingInput">Email address</label>
                       {errors.email && (<p>*email format is Incorrect</p> )}
                   </div>
 
         <br/>
 
-                    <button type="submit" onClick={handleSubmit((e) =>updateData(e))} className="btn btn-success" id="regsubmit">Submit</button>
+                    <button type="submit" onClick={handleSubmit((e) =>updateData(e))} className="btnregister" id="regsubmit">Submit</button>
+                    <Link to={"/user/profile"}><button className="btnreset" id="cancel">Cancel</button></Link>
 
       </form>
+      <br/>
+      </div>
     </>
   )
 }
