@@ -2,7 +2,12 @@ import React,{useState,useEffect} from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
+import profile from "./Assets/profile.png"
+import './profile.css'
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton';
+ 
 
 
 const Profile = props=>{
@@ -29,19 +34,41 @@ const Profile = props=>{
   return(
     <>
     <br/>
-    <div className="container">
-    <div className="border border-primary">
+    <div className="fullprofile">
+      <div className="row">
+        <div className="column column-img">
+
+        <div className="profile">
+          <div className="image">
+          <center><img src={profile}  width="200" height="200"></img></center>
+          <center><h2 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800" , marginTop:"20px"}}>{user.name}</h2></center>
+          <center><h6>{user.email}</h6></center>
+          </div>
+        </div>
+
+        </div>
+        <div className="column column-hrline">
+          <div class="vl"></div>
+        </div>
+        <div className="column column-profle">
+        <div className="profileleft">
       <br/>
 
       <div>
-      <Link to={"/user/update/" + user._id} >
+      {/* <Link to={"/user/update/" + user._id} >
       <button type="button" 
               className="btn btn-outline-success" 
-              >Update Profile</button> </Link>
+              >Update Profile</button> </Link> */}
+      <div className="editbutton">     
+      <Link to={"/user/update/" + user._id}>
+      <IconButton aria-label="delete">
+                         <EditIcon fontSize="medium" color="primary"/> 
+                         </IconButton></Link>
+                         </div>  
     </div>
     <br/>
 
-      <table className="table">
+      <table className="table table-light">
         <tbody>
           <tr>
             <td>Name</td>
@@ -91,6 +118,20 @@ const Profile = props=>{
       </table>
     </div>
     </div>
+        </div>
+      </div>
+
+    {/* <div className="profileleft">
+      <h6>Name: {user.name}</h6>
+      <h6>Address: {user.address}</h6>
+      <h6>Contact Number: {user.contactno}</h6>
+      <h6>Gender: {user.gender}</h6>
+      <h6>Institute: {user.institute}</h6>
+      <h6>Qulification: {user.qulification}</h6>
+      <h6>Subject: {user.subject}</h6>
+      <h6>Grade: {user.grade}</h6>
+      <h6>Email: {user.email}</h6>
+    </div> */}
     </>
   )
 }
