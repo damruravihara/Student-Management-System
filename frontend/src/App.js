@@ -8,6 +8,12 @@ import Register from './components/Register';
 import Profile from './components/Profile';
 import Updateprofile from './components/Updateprofile';
 import Allusers from './components/Allusers';
+import Createclass from './components/Createclass';
+import Allclasses from './components/Allclasses';
+import Updateclass from './components/Updateclass';
+import Addstudent from './components/Addstudent';
+import Allstudentclass from './components/Allstudentclass';
+import Updatestudent from './components/Updatestudent';
 
 
 
@@ -27,6 +33,12 @@ function App() {
         <Route path="/user/profile" component={Profile}/>
         <Route path="/user/update/:id" component={Updateprofile}/>
         <Route path="/admin/alluser" component={Allusers}/>
+        <Route path="/student/createclass" component={Createclass}/>
+        <Route path="/student/allclasses" component={Allclasses}/>
+        <Route path="/student/updateclass/:id" component={Updateclass}/>
+        <Route path="/student/addstudent/:id" component={Addstudent}/>
+        <Route path="/student/allstudents/:id" component={Allstudentclass}/>
+        <Route path="/student/updatestudent/:id" component={Updatestudent}/>
       </div>
     </Router>
     
