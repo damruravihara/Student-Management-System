@@ -1,7 +1,7 @@
 import React,{useContext} from "react";
 import Authentication from "../../Services/Authentication";
 import {AuthContext} from '../../Context/AuthContext';
-import {useHistory} from 'react-router-dom';
+import {useHistory , Link} from 'react-router-dom';
 import swal from 'sweetalert';
 
 function Header(){
@@ -42,18 +42,27 @@ function Header(){
 }
 
   return(
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark" style={{backgroundColor:"#222831"}}>
+      <div class="container-fluid">
   <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+  <div class="collapse navbar-collapse" id="navbarNav">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/user/login">login</a>
-      <a class="nav-item nav-link" href="/user/register">Register</a>
-      <a class="nav-item nav-link" onClick={onClickLogoutHandler}>Logout</a>
-      <a class="nav-item nav-link disabled" href="#">Disabled</a>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Home </a>
+      </li>
+      <li class="nav-item">
+      <Link to={"/user/login"}><a class="nav-link">login</a></Link>
+      </li>
+      <li class="nav-item">
+      <Link to={"/user/register"}><a class="nav-link">Register</a></Link>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" onClick={onClickLogoutHandler}>Logout</a>
+      </li>
+    </div>
     </div>
   </div>
 </nav>

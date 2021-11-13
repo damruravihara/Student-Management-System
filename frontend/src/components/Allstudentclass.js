@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory , useParams } from "react-router-dom";
 import swal from "sweetalert";
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
@@ -9,14 +9,15 @@ import "jspdf-autotable"
 import { Link } from "react-router-dom";
 import EditIcon from '@material-ui/icons/Edit';
 
-export default function Allclasses(){
+export default function Allstudentclass(){
 
   let history = useHistory();
   let path = '/user/login';
+  const {id} = useParams();
+
   const [searchTerm, setsearchTerm] = useState("");
   const [user, setUser] = useState([]);
-
-  const [classroom, setClassroom] = useState([]);
+  const [student, setStudent] = useState([]);
 
   useEffect(()=>{
     const fetchUser = async ()=>{
@@ -31,58 +32,61 @@ export default function Allclasses(){
   }
     fetchUser();
   },[]);
-  
+
   useEffect(()=>{
-    const getClassroom = async()=>{
-     const res = await axios.get('/student/allclasses').then((res)=>{
-      setClassroom(res.data);
+    const getStudent = async()=>{
+     const res = await axios.get(`/student/allstudents/${id}`).then((res)=>{
+      setStudent(res.data);
       }).catch((e)=>{
         alert(e); 
     })
     }
-    getClassroom();
+    getStudent();
   }, [])
 
-  const deleteClass=(id) =>{
+  const deleteStudent=(id) =>{
     swal({
         title: "Are you sure?",
-        text: "If you delete class from system all the students also remove from system",
+        text: "The Student Will be removed from System",
         icon: "warning",
         buttons: true,
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-    axios.delete(`/student/deleteallstudent/${id}`).then(()=>{
+    axios.delete(`/student/deletestudent/${id}`).then(()=>{
      
         if (willDelete) {
-          swal("The Class has been deleted!", 
+          swal("The Student has been deleted!", 
           {icon :"success",});  
           setTimeout(function(){
           window.location.reload();
            },1000);
         } else {
-          swal("Class Is Not Deleted");}
+          swal("Student Is Not Deleted");}
     });
   }
   })
 } 
-
+  
             //generate PDF
             const generatePDF = tickets => {
 
               const doc = new jspdf();
-              const tableColumn = ["Name", "Class Name","Grade"];
+              const tableColumn = ["Student Name", "Gender","Address","Parent","Contact Number","School"];
               const tableRows = [];
           
               tickets.map(ticket => {
                   const ticketData = [
-                    ticket.userName,
-                    ticket.classname,
-                    ticket.grade    
+                    ticket.stname,
+                    ticket.gender,
+                    ticket.address,
+                    ticket.parent,
+                    ticket.contactno,
+                    ticket.school    
                   ];
                   tableRows.push(ticketData);
               })
-              doc.text(user.name+"'s All Classes", 14, 15).setFontSize(12);
+              doc.text(user.name+"'s All Students in" +student.classname, 14, 15).setFontSize(12);
               const date = Date().split(" ");
       const dateStr = date[1] + "-" + date[2] + "-" + date[3];
               // right down width height
@@ -92,14 +96,13 @@ export default function Allclasses(){
               doc.text(`Report Genarated Date - ${dateStr}`, 14, 23);
               doc.save(`AllClasses.pdf`);
             };
-  
 
   return(
     <>
-      <br/>
+          <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>My Classes</h1></center>
+      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>My Students</h1></center>
       <br/>
     <i class="fas fa-search" style={{padding: "30px"}} aria-hidden="true"></i>
       <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Users by Nic No, Name, Role" aria-label="Search" 
@@ -108,45 +111,54 @@ export default function Allclasses(){
           setsearchTerm(e.target.value)
       }}/>
       <div className="reportbtn">
-      <button type="button" className="btn btn-outline-info" onClick={() => generatePDF(classroom)}>GenerateReport</button>
+      <button type="button" className="btn btn-outline-info" onClick={() => generatePDF(student)}>GenerateReport</button>
         </div>
-        <Link to={"/student/createclass"}><button type="reset" className="btnregister" id="regreset">Create Class</button></Link>
         <br/><br/>
 
         <table className="table table-bordered table-hover">
           <thead>
             <tr>
-                  <th>Name</th>
-                  <th>Class Name</th>
-                  <th>Grade</th>
+                  <th>Student Name</th>
+                  <th>Gender</th>
+                  <th>Address</th>
+                  <th>Parent</th>
+                  <th>Contact Number</th>
+                  <th>School</th>
             </tr>
           </thead>
           <tbody>
-          {classroom.filter(val=>{
+          {student.filter(val=>{
                           if (searchTerm === ''){
                               return val;
                           } else if(
-                              val.classname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                              val.grade.toLowerCase().includes(searchTerm.toLowerCase()) 
+                              val.stname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                              val.gender.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                              val.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                              val.parent.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                              val.contactno.toLowerCase().includes(searchTerm.toLowerCase())||
+                              val.school.toLowerCase().includes(searchTerm.toLowerCase())
                           ){
                               return val;
                           }
-                      }).map((classroom,key)=>(
+                      }).map((student,key)=>(
                         <tr key={key}>
-                            <td className="damfont">{classroom.userName}</td>
-                            <td className="damfont">{classroom.classname}</td>
-                            <td className="damfont">{classroom.grade}</td>
+                            <td className="damfont">{student.stname}</td>
+                            <td className="damfont">{student.gender}</td>
+                            <td className="damfont">{student.address}</td>
+                            <td className="damfont">{student.parent}</td>
+                            <td className="damfont">{student.contactno}</td>
+                            <td className="damfont">{student.school}</td>
 
 
-                            <td><Link to={"/student/updateclass/" + classroom._id}>
+                            <td>
+                              <Link to={"/student/updatestudent/" + student._id}>
                           <IconButton aria-label="delete">
                          <EditIcon fontSize="small" color="primary"/> 
                          </IconButton></Link>
-                         <IconButton aria-label="delete"  onClick={() =>  deleteClass(classroom._id)}>
+                         <IconButton aria-label="delete"  onClick={() =>deleteStudent(student._id)}>
                          <DeleteForeverIcon fontSize="small" color="secondary"/> 
                          </IconButton>
-                         <Link to={"/student/addstudent/" + classroom._id}><button className="btnregister" id="regsubmit">Add Student</button></Link>
-                         <Link to={"/student/allstudents/" + classroom._id}><button className="btnregister" id="regsubmit">All Students</button></Link>
+                         {/* <Link to={"/student/addstudent/" + classroom._id}><button className="btnregister" id="regsubmit">Add Student</button></Link> */}
                          </td>
                          
                         </tr>

@@ -39,6 +39,11 @@ connection.once("open", () =>{
 const userRouter = require("./routes/user.js");
 app.use("/user",userRouter);
 
+const classRouter = require("./routes/class");
+app.use("/student",classRouter);
+
+const studentRouter = require("./routes/student");
+app.use("/student",studentRouter);
 
 
 
