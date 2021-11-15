@@ -14,6 +14,8 @@ import Updateclass from './components/Updateclass';
 import Addstudent from './components/Addstudent';
 import Allstudentclass from './components/Allstudentclass';
 import Updatestudent from './components/Updatestudent';
+import Attendence from './components/Attendence';
+import Mark from './components/Mark';
 
 
 
@@ -39,6 +41,8 @@ function App() {
         <Route path="/student/addstudent/:id" component={Addstudent}/>
         <Route path="/student/allstudents/:id" component={Allstudentclass}/>
         <Route path="/student/updatestudent/:id" component={Updatestudent}/>
+        <Route path="/student/attendence/:id" component={Attendence}/>
+        <Route path="/student/mark/:id" component={Mark}/>
       </div>
     </Router>
     

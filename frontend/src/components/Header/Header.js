@@ -30,9 +30,10 @@ function Header(){
              history.push(path);
             swal("Success", 
               "Successfully Logout",
+              {icon: "success"}
             );  setTimeout(function(){
               window.location.reload();
-             },1000);}
+             },1500);}
           // } else {
           //   swal("File Is Not Deleted");}
 
@@ -58,6 +59,9 @@ function Header(){
       </li>
       <li class="nav-item">
       <Link to={"/user/register"}><a class="nav-link">Register</a></Link>
+      </li>
+      <li class="nav-item">
+      <Link to={"/student/allclasses"}><a class="nav-link">My Classes</a></Link>
       </li>
       <li class="nav-item">
       <a class="nav-link" onClick={onClickLogoutHandler}>Logout</a>

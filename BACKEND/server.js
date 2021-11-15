@@ -45,8 +45,14 @@ app.use("/student",classRouter);
 const studentRouter = require("./routes/student");
 app.use("/student",studentRouter);
 
+const attendenceRouter = require("./routes/attendence");
+app.use("/student",attendenceRouter);
 
+const presentRouter = require("./routes/present");
+app.use("/student",presentRouter);
 
+const absentRouter = require("./routes/absent");
+app.use("/student",absentRouter);
 // app.use("/admin",adminRouter);
 // app.use("/mysuporders",myordersRouter);
 

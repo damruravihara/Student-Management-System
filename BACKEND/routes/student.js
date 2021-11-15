@@ -4,6 +4,7 @@ const passport = require('passport');
 const User = require('../models/User');
 const Student = require('../models/Student');
 const Class = require('../models/Class');
+const { db } = require("../models/Student");
 
 studentRouter.post('/addstudent',passport.authenticate('jwt',{session : false}),(req,res)=>{
   const {userId,userName,classId,classname,stname,contactno,parent,address,gender,school} = req.body;
@@ -138,6 +139,29 @@ studentRouter.get('/getstudent/:id',passport.authenticate('jwt',{session : false
       res.status(500).send({status:"Error"});
   })
   // }
+});
+
+// studentRouter.route("/attendance").get((req,res)=> {
+
+//   Student.find().then((labourers)=>{
+//       res.json(labourers)
+//       db.collection("attendances").insertMany(labourers)
+     
+//   }).catch((err)=>{
+//       console.log(err)
+//   })
+// })
+
+studentRouter.get('/attendance/:id',passport.authenticate('jwt',{session : false}),(req,res)=>{
+  Student.find({classId : req.params.id})
+  .then((student)=>{
+    res.json(student);
+    db.collection("attendences").insertMany(student)
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+
 });
 
 module.exports = studentRouter;
