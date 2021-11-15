@@ -147,6 +147,7 @@ export default function Allclasses(){
                          </IconButton>
                          <Link to={"/student/addstudent/" + classroom._id}><button className="btnregister" id="regsubmit">Add Student</button></Link>
                          <Link to={"/student/allstudents/" + classroom._id}><button className="btnregister" id="regsubmit">All Students</button></Link>
+                         <Link to={"/student/attendence/" + classroom._id}><button className="btnregister" id="regsubmit">Attendence</button></Link>
                          </td>
                          
                         </tr>
