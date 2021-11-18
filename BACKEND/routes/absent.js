@@ -26,8 +26,8 @@ absentRouter.post('/addabsent',passport.authenticate('jwt',{session : false}),(r
 
 absentRouter.get('/allabsent/:id/:date',passport.authenticate('jwt',{session : false}),(req,res)=>{
   Absent.find({classId : req.params.id}&&{currentDate : req.params.date})
-  .then((absent)=>{
-    res.json(absent);
+  .then((attendence)=>{
+    res.json(attendence);
   })
   .catch((err)=>{
     console.log(err);

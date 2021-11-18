@@ -25,9 +25,15 @@ presentRouter.post('/addpresent',passport.authenticate('jwt',{session : false}),
 });
 
 presentRouter.get('/allpresent/:id/:date',passport.authenticate('jwt',{session : false}),(req,res)=>{
-  Present.find({classId : req.params.id}&&{currentDate : req.params.date})
-  .then((present)=>{
-    res.json(present);
+
+  let query = {classId : req.params.id}&&{currentDate : req.params.date};
+  Present.find({currentDate : req.params.date})
+  .then((attendence)=>{
+      res.json(attendence);
+      console.log(attendence);
+    // Present.find({currentDate : req.params.date}).then((attendence)=>{
+    //   res.json(attendence);
+    // })
   })
   .catch((err)=>{
     console.log(err);

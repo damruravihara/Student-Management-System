@@ -121,9 +121,9 @@ export default function Allstudentclass(){
                   <th>Student Name</th>
                   <th>Gender</th>
                   <th>Address</th>
-                  <th>Parent</th>
+                  {/* <th>Parent</th> */}
                   <th>Contact Number</th>
-                  <th>School</th>
+                  {/* <th>School</th> */}
             </tr>
           </thead>
           <tbody>
@@ -145,9 +145,9 @@ export default function Allstudentclass(){
                             <td className="damfont">{student.stname}</td>
                             <td className="damfont">{student.gender}</td>
                             <td className="damfont">{student.address}</td>
-                            <td className="damfont">{student.parent}</td>
+                            {/* <td className="damfont">{student.parent}</td> */}
                             <td className="damfont">{student.contactno}</td>
-                            <td className="damfont">{student.school}</td>
+                            {/* <td className="damfont">{student.school}</td> */}
 
 
                             <td>

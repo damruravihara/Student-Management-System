@@ -4,6 +4,8 @@ import swal from "sweetalert";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import profile from "./Assets/profile.png"
+import women from "./Assets/woman.png"
+import man from "./Assets/man.png"
 import './profile.css'
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
@@ -40,7 +42,7 @@ const Profile = props=>{
 
         <div className="profile">
           <div className="image">
-          <center><img src={profile}  width="200" height="200"></img></center>
+          {user.gender==="Female"?<center><img src={women}  width="200" height="200"></img></center>:user.gender==="male"?<center><img src={man}  width="200" height="200"></img></center>:<center><img src={profile}  width="200" height="200"></img></center>}
           <center><h2 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800" , marginTop:"20px"}}>{user.name}</h2></center>
           <center><h6>{user.email}</h6></center>
           </div>

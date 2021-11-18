@@ -20,7 +20,7 @@ export default function Attendence(){
     const getAttendence = async()=>{
      const res = await axios.get(`/student/getattendence/${id}`).then((res)=>{
       setAttendence(res.data);
-      }).catch((e)=>{
+      }).catch(()=>{
         history.push(path);
         swal({title: "Unauthorized",
         text: "Please Login First",
@@ -37,10 +37,14 @@ export default function Attendence(){
           setTimeout(function(){
             window.location.reload();
            });
-      }).catch((e)=>{
-        alert(e);
       })
   }
+
+  function Attendencehistory(){
+    history.push(`/student/historyatten/${id}`);
+  }
+
+
 
   return(
     <>
@@ -58,7 +62,9 @@ export default function Attendence(){
       <div className="reportbtn">
       <button type="button" className="btn btn-outline-info" onClick={() => viewstudent()}>View Students</button>
         </div>
-        <br/><br/>
+        <br/>
+          <button onClick={() => Attendencehistory()} className="btnregister" id="regsubmit">Attendence History</button>
+        <br/>
 
         <table className="table table-bordered table-hover">
           <thead>
