@@ -17,6 +17,11 @@ import Updatestudent from './components/Updatestudent';
 import Attendence from './components/Attendence';
 import Mark from './components/Mark';
 
+import Viewpayment from './components/Viewpayment';
+import Paymentstudent from './components/Paymentstudent';
+import Addpayment from './components/Addpayment';
+import Attendencehistory from './components/Attendencehistory';
+
 
 
 
@@ -43,6 +48,10 @@ function App() {
         <Route path="/student/updatestudent/:id" component={Updatestudent}/>
         <Route path="/student/attendence/:id" component={Attendence}/>
         <Route path="/student/mark/:id" component={Mark}/>
+        <Route path="/student/allpayment/:id" component={Viewpayment}/>
+        <Route path="/student/paymentstudent/:id" component={Paymentstudent}/>
+        <Route path="/student/addpayment/:id" component={Addpayment}/>
+        <Route path="/student/historyatten/:id" component={Attendencehistory}/>
       </div>
     </Router>
     

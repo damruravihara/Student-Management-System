@@ -53,6 +53,9 @@ app.use("/student",presentRouter);
 
 const absentRouter = require("./routes/absent");
 app.use("/student",absentRouter);
+
+const paymentRouter = require("./routes/payment");
+app.use("/student",paymentRouter);
 // app.use("/admin",adminRouter);
 // app.use("/mysuporders",myordersRouter);
 
