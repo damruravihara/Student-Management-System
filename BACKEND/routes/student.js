@@ -41,6 +41,16 @@ studentRouter.get('/allstudents/:id',passport.authenticate('jwt',{session : fals
 
 });
 
+studentRouter.get('/mystudents',passport.authenticate('jwt',{session : false}),(req,res)=>{
+  Student.find().then((student)=>{
+    res.json(student);
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+
+});
+
 studentRouter.delete('/deletestudent/:id',passport.authenticate('jwt',{session : false}),(req,res)=>{
   let classID = req.params.id;
 
