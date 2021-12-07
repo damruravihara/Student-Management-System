@@ -6,11 +6,15 @@ import './register.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 export default function Register(){
 
   const [passwordShown, setPasswordShown] = useState(false);
+
+  let history = useHistory();
+  let path = '/public/login';
 
   const { register, handleSubmit, formState: { errors }} = useForm();
 
@@ -59,9 +63,7 @@ export default function Register(){
       text: "Supplier Successfully registered",
       icon: "success",
       button: "Ok",
-    });setTimeout(function(){
-      window.location.reload();
-     },2500);
+    });history.push(path);
     }).catch(()=>{
       swal("Please fill Form correctly");
     })
@@ -74,17 +76,17 @@ export default function Register(){
     <>
     <br/>
     <div className="container">
-      <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>Register</h1></center>
+    <h6 style={{padding:"10px", fontSize:"18px"}}>Already Have an Account <Link to="/public/login">Login</Link></h6>
+    <hr/>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>Register</h1></center>
       <br/>
       <form onSubmit={handleSubmit(sendData)} className="needs-validation" noValidate>
         <div className="row g-2">
           <div className="col-md-6 form-floating">
-            <input type="text" className="form-control logininput" {...register("name", { maxLength: 20 })} id="name" placeholder="Name"
+            <input type="text" className="form-control logininput" id="name" placeholder="Name"
               onChange={(e) => {setName(e.target.value);
               }} required/>
               <label for="floatingInput">Name</label>
-              {errors?.name?.type === "maxLength" && (<p>*Name cannot exceed 20 characters</p> )}
           </div>
 
           <div className="col-md-6 form-floating">
@@ -198,7 +200,7 @@ export default function Register(){
                       {errors?.password?.type === "minLength" && (<p>*Password must contain minimum 8 characters </p> )}
                     </div>
                     <br/>
-                    <button type="submit" className="btnregister" id="regsubmit">Submit</button>
+                    <button type="submit" className="btnregister" id="regsubmit">Submit</button>&nbsp;&nbsp;
                 <button type="reset" className="btnreset" id="regreset">Reset</button>
 
       </form>

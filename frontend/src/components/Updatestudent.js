@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 export default function Updatestudent(){
 
   let history = useHistory();
-  let path = '/user/login';
+  let path = '/public/login';
   const {id} = useParams();
   const { register, handleSubmit, formState: { errors }} = useForm();
 
@@ -68,7 +68,7 @@ export default function Updatestudent(){
   text: "Student Successfully Updated",
   icon: "success",
   button: "Ok",
-});history.push('/student/allstudents/' +student.classId);
+});history.push('/user/allstudents/' +student.classId);
     }).catch((e)=>{
        swal("Please fill Form correctly " +e);
       })
@@ -79,7 +79,7 @@ export default function Updatestudent(){
     <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>Update Student</h1></center>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>Update Student</h1></center>
       <br/>
       <form className="needs-validation" noValidate>
         <div className="row g-2">
@@ -147,7 +147,7 @@ export default function Updatestudent(){
         <br/>
       
                     <button type="submit" className="btnregister" onClick={handleSubmit(updateData)} id="regsubmit">Submit</button>
-                    <Link to={"/student/allstudents/" +student.classId}><button type="reset" className="btnreset" id="regreset">cancel</button></Link>
+                    <Link to={"/user/allstudents/" +student.classId}><button type="reset" className="btnreset" id="regreset">cancel</button></Link>
       </form>
       <br/>
     </div>

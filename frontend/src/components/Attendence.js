@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function Attendence(){
 
   let history = useHistory();
-  let path = '/user/login';
+  let path = '/public/login';
   const {id} = useParams();
 
   const [searchTerm, setsearchTerm] = useState("");
@@ -20,12 +20,7 @@ export default function Attendence(){
     const getAttendence = async()=>{
      const res = await axios.get(`/student/getattendence/${id}`).then((res)=>{
       setAttendence(res.data);
-      }).catch(()=>{
-        history.push(path);
-        swal({title: "Unauthorized",
-        text: "Please Login First",
-        icon: "warning"} );
-    })
+      })
     }
     getAttendence();
   }, []);
@@ -39,31 +34,23 @@ export default function Attendence(){
            });
       })
   }
-
-  function Attendencehistory(){
-    history.push(`/student/historyatten/${id}`);
-  }
-
-
-
   return(
     <>
               <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>Attendence</h1></center>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>Attendence</h1></center>
       <br/>
-    <i class="fas fa-search" style={{padding: "30px"}} aria-hidden="true"></i>
-      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Users by Nic No, Name, Role" aria-label="Search" 
-      
+      <input className="search" type="text" placeholder="Search" aria-label="Search"  
       onChange={(e) => {
           setsearchTerm(e.target.value)
       }}/>
-      <div className="reportbtn">
-      <button type="button" className="btn btn-outline-info" onClick={() => viewstudent()}>View Students</button>
-        </div>
         <br/>
-          <button onClick={() => Attendencehistory()} className="btnregister" id="regsubmit">Attendence History</button>
+          <div className="row" style={{padding:"10px"}}>
+          <div className="col form-floating">
+          <button type="button" className="btnregister" onClick={() => viewstudent()}>View Students</button>
+        </div>  
+        </div> 
         <br/>
 
         <table className="table table-bordered table-hover">
@@ -92,7 +79,7 @@ export default function Attendence(){
                          {/* <IconButton aria-label="delete"  onClick={() =>deleteStudent(student._id)}>
                          <DeleteForeverIcon fontSize="small" color="secondary"/> 
                          </IconButton> */}
-                         <Link to={"/student/mark/" +attendence._id}><button className="btnregister" id="regsubmit">Mark</button></Link>
+                         <Link to={"/user/mark/" +attendence._id}><button className="btnregister" id="regsubmit">Mark</button></Link>
                          </td>
                          
                         </tr>

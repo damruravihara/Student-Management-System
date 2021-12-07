@@ -9,8 +9,8 @@ export default function Createclass(){
 
   // const { register, handleSubmit, formState: { errors }} = useForm();
   let history = useHistory();
-  let path = '/user/login';
-  let path2 = '/student/allclasses';
+  let path = '/public/login';
+  let path2 = '/user/allclasses';
 
   const [user, setUser] = useState([]);
   const [userId, setUserId] = useState("");
@@ -66,7 +66,7 @@ export default function Createclass(){
     <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>Create Class</h1></center>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>Create Class</h1></center>
       <br/>
       <form className="needs-validation" noValidate>
       <div className="row g-2">

@@ -9,8 +9,8 @@ export default function Addstudent(){
 
     const { register, handleSubmit, formState: { errors }} = useForm();
     let history = useHistory();
-    let path = '/user/login';
-    let path2 = '/student/allclasses';
+    let path = '/public/login';
+    let path2 = '/user/allclasses';
     const {id} = useParams();
 
     const [user, setUser] = useState([]);
@@ -75,7 +75,7 @@ export default function Addstudent(){
       axios.post('/student/addstudent',newStudent).then(()=>{
         swal({
         title: "Success!",
-        text: "Supplier Successfully registered",
+        text: "Your Successfully registered",
         icon: "success",
         button: "Ok",
       });history.push(path2);
@@ -91,7 +91,7 @@ export default function Addstudent(){
     <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>Add Student</h1></center>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>Add Student</h1></center>
       <br/>
       <form className="needs-validation" noValidate>
       <div className="row g-2">
@@ -195,7 +195,7 @@ export default function Addstudent(){
         </div>
         <br/>
       
-                    <button type="submit" className="btnregister" onClick={handleSubmit(sendData)} id="regsubmit">Submit</button>
+                    <button type="submit" className="btnregister" onClick={handleSubmit(sendData)} id="regsubmit">Submit</button>&nbsp;&nbsp;
                     <button type="reset" className="btnreset" id="regreset">Reset</button>
       </form>
       <br/>

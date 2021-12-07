@@ -8,8 +8,8 @@ import { Link , useParams } from "react-router-dom";
 export default function Updateclass(){
 
   let history = useHistory();
-  let path = '/user/login';
-  let path2 = '/student/allclasses';
+  let path = '/public/login';
+  let path2 = '/user/allclasses';
   const {id} = useParams();
 
   const [user, setUser] = useState([]);
@@ -75,7 +75,7 @@ export default function Updateclass(){
      <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>Update Class</h1></center>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>Update Class</h1></center>
       <br/>
       <form className="needs-validation" noValidate>
       <div className="row g-2">
@@ -124,7 +124,7 @@ export default function Updateclass(){
               
           </div>
                     <button type="submit" className="btnregister" onClick={updateData} id="regsubmit">Submit</button>
-                    <Link to={"/student/allclasses"}><button type="reset" className="btnreset" id="regreset">cancel</button></Link>
+                    <Link to={"/user/allclasses"}><button type="reset" className="btnreset" id="regreset">cancel</button></Link>
       </form>
       <br/>
     </div>

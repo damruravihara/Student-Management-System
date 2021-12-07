@@ -8,7 +8,7 @@ import './header.css'
 const Header = props =>{
 
 return(
-    <nav className="navbar navbar-expand-lg navbar-dark" style={{backgroundColor:"#222831"}}>
+    <nav className="navbar sticky-top navbar-expand-lg navbar-dark" style={{backgroundColor:"#222831"}}>
       <div className="container-fluid">
       <Link to="/public" className="navbar-brand"><img src="https://i.ibb.co/8D77tLx/short-Logocrop.png" alt="whitelogo" width="30" height="30"/></Link>
   <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" >

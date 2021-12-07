@@ -8,7 +8,7 @@ import { useHistory, useParams, Link } from "react-router-dom";
 export default function Mark(){
 
   let history = useHistory();
-  let path = '/user/login';
+  let path = '/public/login';
   const {id} = useParams();
   const { register, handleSubmit, formState: { errors }} = useForm();
 
@@ -44,10 +44,9 @@ export default function Mark(){
     setClassname(res.data.attendence.classname)
     setStdID(res.data.attendence._id)
     setStname(res.data.attendence.stname)
-    }).catch(()=>{
-        history.push(path);
-        swal({title: "Unauthorized",
-        text: "Please Login First",
+    }).catch((e)=>{
+        swal({title: "Error",
+        text: +e,
         icon: "warning"} ); 
   })
 }, [])
@@ -73,7 +72,7 @@ function presenrData(e){
         type: "success"
       }).then(function(){
         //add my sup orders location
-        window.location.href=`/student/attendence/${classId}`
+        window.location.href=`/user/attendence/${classId}`
        })
       }
   });
@@ -101,7 +100,7 @@ function absentData(e){
         type: "success"
       }).then(function(){
         //add my sup orders location
-        window.location.href=`/student/attendence/${classId}`
+        window.location.href=`/user/attendence/${classId}`
        })
       }
   });
@@ -113,7 +112,7 @@ function absentData(e){
     <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>Mark Attendence</h1></center>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>Mark Attendence</h1></center>
       <br/>
       <form className="needs-validation" noValidate>
         <div className="row g-2">
@@ -142,7 +141,7 @@ function absentData(e){
         <br/>
         <button type="submit" className="btnregister" onClick={presenrData} id="regsubmit">Present</button>&nbsp;&nbsp;
         <button type="submit" className="btnreset" onClick={absentData} id="regsubmit">Absent</button>&nbsp;&nbsp;
-        <Link to={"/student/attendence/" +attendence.classId}><button type="reset" className="btnreset" id="regreset">cancel</button></Link>
+        <Link to={"/user/attendence/" +attendence.classId}><button type="reset" className="btnreset" id="regreset">cancel</button></Link>
         </form>
         <br/>
     </div>

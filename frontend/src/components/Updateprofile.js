@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 export default function Updateprofile(){
 
   let history = useHistory();
-  let path = '/user/login';
+  let path = '/public/login';
   let path2 = '/user/profile';
   const{ id } = useParams();
 
@@ -74,7 +74,7 @@ if(e!=null){
   button: "Ok",
 });history.push(path2);
     }).catch((e)=>{
-       swal("Please fill Form correctly" +e);
+       swal("Please fill Form correctly " +e);
       })}else{
         swal("Please fill Form correctly");
       }
@@ -183,7 +183,7 @@ if(e!=null){
 
         <br/>
 
-                    <button type="submit" onClick={handleSubmit((e) =>updateData(e))} className="btnregister" id="regsubmit">Submit</button>
+                    <button type="submit" onClick={handleSubmit((e) =>updateData(e))} className="btnregister" id="regsubmit">Submit</button>&nbsp;&nbsp;
                     <Link to={"/user/profile"}><button className="btnreset" id="cancel">Cancel</button></Link>
 
       </form>

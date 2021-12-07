@@ -84,7 +84,7 @@
     width: 300px;
     margin-top: 30px;
     margin-left: 114px;
-    background-color: purple;
+    background-color: white;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
 
@@ -130,7 +130,7 @@
     width: 300px;
     margin-top: 30px;
     margin-left: 200px;
-    background-color: brown;
+    background-color: white;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
 
@@ -175,7 +175,7 @@
     width: 300px;
     margin-top: 30px;
     margin-left: 20px;
-    background-color: yellow;
+    background-color: white;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
   
@@ -220,7 +220,7 @@
     width: 300px;
     margin-top: 30px;
     margin-left: 50px;
-    background-color: red;
+    background-color: white;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
   
@@ -263,7 +263,7 @@
     width: 300px;
     margin-top: 30px;
     margin-left: 50px;
-    background-color: blue;
+    background-color: white;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
   
@@ -307,7 +307,7 @@
     width: 300px;
     margin-top: 30px;
     margin-left: 50px;
-    background-color: pink;
+    background-color: white;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   }
   
@@ -328,6 +328,7 @@
     margin-right: auto;
     flex-shrink: inherit;
   }
+
   
   .vl{
     border-left: 2px solid black;
@@ -335,7 +336,7 @@
     margin-left: 460px;
     margin-top: -285px;
   }
-  
+   
   .column-hrline{
     /* margin-bottom: -1990px; */
     width: 0px;
