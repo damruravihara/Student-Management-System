@@ -3,70 +3,23 @@ import Authentication from "../../Services/Authentication";
 import {AuthContext} from '../../Context/AuthContext';
 import {useHistory , Link} from 'react-router-dom';
 import swal from 'sweetalert';
+import './header.css'
 
-function Header(){
+const Header = props =>{
 
-  const {isAuthenticated,user,setIsAuthenticated,setUser} = useContext(AuthContext);
-
-  let history = useHistory();
-  let path = '/user/login';
-  const authContext = useContext(AuthContext);
-
-  const onClickLogoutHandler = ()=>{
-    Authentication.logout().then(data=>{
-      
-      if(data.success){
-        swal({
-          title: "Log Out",
-          text: "Are you Sure?",
-          icon: "warning",
-          buttons: true,
-          dangerMode: true,
-        })
-        .then((willDelete) => {
-          if (willDelete) {
-            setUser(data.user);
-            setIsAuthenticated(false);
-             history.push(path);
-            swal("Success", 
-              "Successfully Logout",
-              {icon: "success"}
-            );  setTimeout(function(){
-              window.location.reload();
-             },1500);}
-          // } else {
-          //   swal("File Is Not Deleted");}
-
-      })
-      }
-  })
-}
-
-  return(
-    <nav class="navbar navbar-expand-lg navbar-dark" style={{backgroundColor:"#222831"}}>
-      <div class="container-fluid">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+return(
+    <nav className="navbar navbar-expand-lg navbar-dark" style={{backgroundColor:"#222831"}}>
+      <div className="container-fluid">
+      <Link to="/public" className="navbar-brand"><img src="https://i.ibb.co/8D77tLx/short-Logocrop.png" alt="whitelogo" width="30" height="30"/></Link>
+  <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" >
+    <span className="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <div class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="#">Home </a>
-      </li>
-      <li class="nav-item">
-      <Link to={"/user/login"}><a class="nav-link">login</a></Link>
-      </li>
-      <li class="nav-item">
-      <Link to={"/user/register"}><a class="nav-link">Register</a></Link>
-      </li>
-      <li class="nav-item">
-      <Link to={"/student/allclasses"}><a class="nav-link">My Classes</a></Link>
-      </li>
-      <li class="nav-item">
-      <a class="nav-link" onClick={onClickLogoutHandler}>Logout</a>
-      </li>
-    </div>
+  <div className="collapse navbar-collapse" id="navbarNav">
+      <ul className="navbar-nav mr-auto">
+      <Link to="/public"><li className="nav-link nav-item active">Home</li></Link>
+      <Link to="/public/login"><li className="nav-link nav-item">Login</li></Link>
+      <Link to="/public/register"><li className="nav-link nav-item">Register</li></Link>
+    </ul>
     </div>
   </div>
 </nav>
