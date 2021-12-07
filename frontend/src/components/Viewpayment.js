@@ -12,11 +12,20 @@ import EditIcon from '@material-ui/icons/Edit';
 export default function Viewpayment(){
 
   let history = useHistory();
-  let path = '/user/login';
+  let path = '/public/login';
   const {id} = useParams();
 
   const [searchTerm, setsearchTerm] = useState("");
   const [payment, setPayment] = useState([]);
+  const [student, setStudent] = useState([]);
+
+  useEffect(()=>{
+    axios.get(`/student/getstudent/${id}`).then((res)=>{
+    setStudent(res.data.student)
+    }).catch((e)=>{
+      alert("getstudent " +e); 
+  })
+}, [])
 
   useEffect(()=>{
     const getPayment = async()=>{
@@ -33,7 +42,7 @@ export default function Viewpayment(){
   }, [])
 
   function addpayment(){
-    history.push(`/student/addpayment/${id}`);
+    history.push(`/user/addpayment/${id}`);
   }
 
   return(
@@ -41,15 +50,14 @@ export default function Viewpayment(){
     <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>My Students</h1></center>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>{student.stname}'s Payment Details</h1></center>
       <br/>
-      <i class="fas fa-search" style={{padding: "30px"}} aria-hidden="true"></i>
-      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Users by Nic No, Name, Role" aria-label="Search" 
-      
+      <input className="search" type="text" placeholder="Search" aria-label="Search"  
       onChange={(e) => {
           setsearchTerm(e.target.value)
       }}/>
       <br/>
+      <div style={{padding:"5px"}}></div>
       <button className="btnregister" id="regsubmit" onClick={addpayment}>Add Payment</button>
       <br/><br/>
       <table className="table table-bordered table-hover">

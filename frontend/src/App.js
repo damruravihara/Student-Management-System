@@ -16,11 +16,17 @@ import Allstudentclass from './components/Allstudentclass';
 import Updatestudent from './components/Updatestudent';
 import Attendence from './components/Attendence';
 import Mark from './components/Mark';
-
+// import NavBar from './components/Header/Header';
 import Viewpayment from './components/Viewpayment';
 import Paymentstudent from './components/Paymentstudent';
 import Addpayment from './components/Addpayment';
 import Attendencehistory from './components/Attendencehistory';
+import LandingPage from './components/landingPage';
+import Home from './components/Home';
+import AutharizeHeader from './components/Header/AutharizeHeader';
+import Mystudents from './components/Mystudents';
+import Studentprofile from './components/Studentprofie';
+import Updatestudentprofile from './components/UpdateStdProfile';
 
 
 
@@ -33,25 +39,30 @@ function App() {
   return (
     <Router>
       <div>
-
-        <Route path="/" component={Header}/>
-        <Route path="/user/login" component={Login}/>
-        <Route path="/user/register" component={Register}/>
+        <Route path="/public" component={Header}/>
+        <Route path="/user" component={AutharizeHeader}/>
+        <Route path="/user" exact component={Home}/>
+        <Route path="/public" exact component={LandingPage}/>
+        <Route path="/public/login" component={Login}/>
+        <Route path="/public/register" component={Register}/>
         <Route path="/user/profile" component={Profile}/>
         <Route path="/user/update/:id" component={Updateprofile}/>
-        <Route path="/admin/alluser" component={Allusers}/>
-        <Route path="/student/createclass" component={Createclass}/>
-        <Route path="/student/allclasses" component={Allclasses}/>
-        <Route path="/student/updateclass/:id" component={Updateclass}/>
-        <Route path="/student/addstudent/:id" component={Addstudent}/>
-        <Route path="/student/allstudents/:id" component={Allstudentclass}/>
-        <Route path="/student/updatestudent/:id" component={Updatestudent}/>
-        <Route path="/student/attendence/:id" component={Attendence}/>
-        <Route path="/student/mark/:id" component={Mark}/>
-        <Route path="/student/allpayment/:id" component={Viewpayment}/>
-        <Route path="/student/paymentstudent/:id" component={Paymentstudent}/>
-        <Route path="/student/addpayment/:id" component={Addpayment}/>
-        <Route path="/student/historyatten/:id" component={Attendencehistory}/>
+        <Route path="/user/alluser" component={Allusers}/>
+        <Route path="/user/createclass" component={Createclass}/>
+        <Route path="/user/allclasses" component={Allclasses}/>
+        <Route path="/user/updateclass/:id" component={Updateclass}/>
+        <Route path="/user/addstudent/:id" component={Addstudent}/>
+        <Route path="/user/allstudents/:id" component={Allstudentclass}/>
+        <Route path="/user/updatestudent/:id" component={Updatestudent}/>
+        <Route path="/user/attendence/:id" component={Attendence}/>
+        <Route path="/user/mark/:id" component={Mark}/>
+        <Route path="/user/allpayment/:id" component={Viewpayment}/>
+        <Route path="/user/paymentstudent/:id" component={Paymentstudent}/>
+        <Route path="/user/addpayment/:id" component={Addpayment}/>
+        <Route path="/user/historyatten/:id" component={Attendencehistory}/>
+        <Route path="/user/mystudents" component={Mystudents}/>
+        <Route path="/user/studentprofile/:id" component={Studentprofile}/>
+        <Route path="/user/updatestdprofile/:id" component={Updatestudentprofile}/>
       </div>
     </Router>
     

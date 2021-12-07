@@ -15,7 +15,7 @@ import IconButton from '@material-ui/core/IconButton';
 const Profile = props=>{
 
   let history = useHistory();
-  let path = '/user/login';
+  let path = '/public/login';
 
   const [user, setUser] = useState([]);
 
@@ -43,7 +43,7 @@ const Profile = props=>{
         <div className="profile">
           <div className="image">
           {user.gender==="Female"?<center><img src={women}  width="200" height="200"></img></center>:user.gender==="male"?<center><img src={man}  width="200" height="200"></img></center>:<center><img src={profile}  width="200" height="200"></img></center>}
-          <center><h2 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800" , marginTop:"20px"}}>{user.name}</h2></center>
+          <center><h2 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800" , marginTop:"20px"}}>{user.name}</h2></center>
           <center><h6>{user.email}</h6></center>
           </div>
         </div>

@@ -90,13 +90,11 @@ const generatePDF = tickets => {
     <>
     <br/>
     <div className="container">
-    <i class="fas fa-search" style={{padding: "30px"}} aria-hidden="true"></i>
-      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Users by Nic No, Name, Role" aria-label="Search" 
-      
+    <input className="search" type="text" placeholder="Search" aria-label="Search"  
       onChange={(e) => {
           setsearchTerm(e.target.value)
       }}/>
-      <div className="reportbtn">
+      <div className="reportbtn" style={{padding:"10px"}}>
       <button type="button" className="btn btn-outline-info" onClick={() => generatePDF(user)}>GenerateReport</button>
         </div>
         <br/><br/>

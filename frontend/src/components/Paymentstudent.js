@@ -12,7 +12,7 @@ import EditIcon from '@material-ui/icons/Edit';
 export default function Paymentstudent(){
 
   let history = useHistory();
-  let path = '/user/login';
+  let path = '/public/login';
   const {id} = useParams();
 
   const [searchTerm, setsearchTerm] = useState("");
@@ -34,7 +34,7 @@ export default function Paymentstudent(){
     <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>My Students</h1></center>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>My Students</h1></center>
       <br/>
     <i class="fas fa-search" style={{padding: "30px"}} aria-hidden="true"></i>
       <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Users by Nic No, Name, Role" aria-label="Search" 
@@ -70,7 +70,7 @@ export default function Paymentstudent(){
                          {/* <IconButton aria-label="delete"  onClick={() =>deleteStudent(student._id)}>
                          <DeleteForeverIcon fontSize="small" color="secondary"/> 
                          </IconButton> */}
-                         <Link to={"/student/allpayment/" + student._id}><button className="btnregister" id="regsubmit">Payment Details</button></Link>
+                         <Link to={"/user/allpayment/" + student._id}><button className="btnregister" id="regsubmit">Payment Details</button></Link>
                          </td>
                          
                         </tr>

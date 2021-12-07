@@ -12,7 +12,7 @@ import EditIcon from '@material-ui/icons/Edit';
 export default function Allstudentclass(){
 
   let history = useHistory();
-  let path = '/user/login';
+  let path = '/public/login';
   const {id} = useParams();
 
   const [searchTerm, setsearchTerm] = useState("");
@@ -102,16 +102,14 @@ export default function Allstudentclass(){
           <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>My Students</h1></center>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>My Students</h1></center>
       <br/>
-    <i class="fas fa-search" style={{padding: "30px"}} aria-hidden="true"></i>
-      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Users by Nic No, Name, Role" aria-label="Search" 
-      
+      <input className="search" type="text" placeholder="Search" aria-label="Search"  
       onChange={(e) => {
           setsearchTerm(e.target.value)
       }}/>
-      <div className="reportbtn">
-      <button type="button" className="btn btn-outline-info" onClick={() => generatePDF(student)}>GenerateReport</button>
+      <div className="reportbtn" style={{padding:"10px"}}>
+      <button type="button" className="btnregister" onClick={() => generatePDF(student)}>GenerateReport</button>
         </div>
         <br/><br/>
 
@@ -151,7 +149,7 @@ export default function Allstudentclass(){
 
 
                             <td>
-                              <Link to={"/student/updatestudent/" + student._id}>
+                              <Link to={"/user/updatestudent/" + student._id}>
                           <IconButton aria-label="delete">
                          <EditIcon fontSize="small" color="primary"/> 
                          </IconButton></Link>

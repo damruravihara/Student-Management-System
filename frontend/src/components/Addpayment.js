@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 export default function Addpayment(){
 
   let history = useHistory();
-  let path = '/user/login';
+  let path = '/public/login';
   const {id} = useParams();
   const { register, handleSubmit, formState: { errors }} = useForm();
 
@@ -32,11 +32,13 @@ export default function Addpayment(){
     setClassId(res.data.student.classId)
     setClassName(res.data.student.classname)
     setStdId(res.data.student._id)
+    setNote("No Special Note")
     }).catch((e)=>{
       alert("getclass " +e); 
       console.log(id);
   })
 }, [])
+
 
 function sendData(e){
    
@@ -60,7 +62,7 @@ function sendData(e){
     text: "New Payment Added Successfully",
     icon: "success",
     button: "Ok",
-  });history.push(`/student/allpayment/${student._id}`);
+  });history.push(`/user/allpayment/${student._id}`);
   }).catch((e)=>{
     swal("Please fill Form correctly " +e);
   })
@@ -71,7 +73,7 @@ function sendData(e){
     <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>Update Student</h1></center>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>Add Payment</h1></center>
       <br/>
       <form onSubmit={sendData} className="needs-validation" noValidate>
       <div className="row g-2">
@@ -123,7 +125,7 @@ function sendData(e){
         </div>
         <br/>
         <button type="submit" className="btnregister" id="regsubmit">Submit</button>&nbsp;&nbsp;
-        <Link to={"/student/allpayment/" +student._id}><button type="reset" className="btnreset" id="regreset">cancel</button></Link>
+        <Link to={"/user/allpayment/" +student._id}><button type="reset" className="btnreset" id="regreset">cancel</button></Link>
 
 
 

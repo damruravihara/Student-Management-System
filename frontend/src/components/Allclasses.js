@@ -8,11 +8,12 @@ import jspdf from 'jspdf'
 import "jspdf-autotable"
 import { Link } from "react-router-dom";
 import EditIcon from '@material-ui/icons/Edit';
+import "./allusers.css"
 
 export default function Allclasses(){
 
   let history = useHistory();
-  let path = '/user/login';
+  let path = '/public/login';
   const [searchTerm, setsearchTerm] = useState("");
   const [user, setUser] = useState([]);
 
@@ -66,6 +67,9 @@ export default function Allclasses(){
   }
   })
 } 
+const Attendencehistory=(id)=>{
+  history.push(`/user/historyatten/${id}`);
+}
 
             //generate PDF
             const generatePDF = tickets => {
@@ -99,24 +103,27 @@ export default function Allclasses(){
       <br/>
     <div className="container">
     <br/>
-      <center><h1 style={{fontFamily:"Arial,Helvetica,sans-serif" , fontSize:"30px" , fontWeight:"800"}}>My Classes</h1></center>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>{user.name}'s Classes</h1></center>
       <br/>
-    <i class="fas fa-search" style={{padding: "30px"}} aria-hidden="true"></i>
-      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search Users by Nic No, Name, Role" aria-label="Search" 
-      
+    {/* <i class="fas fa-search" style={{padding: "30px"}} aria-hidden="true"></i> */}
+      <input className="search" type="text" placeholder="Search" aria-label="Search"  
       onChange={(e) => {
           setsearchTerm(e.target.value)
       }}/>
-      <div className="reportbtn">
-      <button type="button" className="btn btn-outline-info" onClick={() => generatePDF(classroom)}>GenerateReport</button>
-        </div>
-        <Link to={"/student/createclass"}><button type="reset" className="btnregister" id="regreset">Create Class</button></Link>
-        <br/><br/>
+            <br/>
+      <div className="row" style={{padding:"10px"}}>
+          <div className="col form-floating">
+      <button type="button" className="btnregister" onClick={() => generatePDF(classroom)}>GenerateReport</button>&nbsp;&nbsp;
 
+        <Link to={"/user/createclass"}><button type="reset" className="btnregister" id="regreset">Create Class</button></Link>&nbsp;&nbsp;
+        <button onClick={() => Attendencehistory(classroom._id)} className="btnregister" id="regsubmit">Attendence History</button>
+        </div>  
+        </div> 
+        <br/>
         <table className="table table-bordered table-hover">
           <thead>
             <tr>
-                  <th>Name</th>
+                  {/* <th>Name</th> */}
                   <th>Class Name</th>
                   <th>Grade</th>
             </tr>
@@ -133,22 +140,22 @@ export default function Allclasses(){
                           }
                       }).map((classroom,key)=>(
                         <tr key={key}>
-                            <td className="damfont">{classroom.userName}</td>
+                            {/* <td className="damfont">{classroom.userName}</td> */}
                             <td className="damfont">{classroom.classname}</td>
                             <td className="damfont">{classroom.grade}</td>
 
 
-                            <td><Link to={"/student/updateclass/" + classroom._id}>
+                            <td><Link to={"/user/updateclass/" + classroom._id}>
                           <IconButton aria-label="delete">
                          <EditIcon fontSize="small" color="primary"/> 
                          </IconButton></Link>
                          <IconButton aria-label="delete"  onClick={() =>  deleteClass(classroom._id)}>
                          <DeleteForeverIcon fontSize="small" color="secondary"/> 
                          </IconButton>
-                         <Link to={"/student/addstudent/" + classroom._id}><button className="btnregister" id="regsubmit">Add Student</button></Link>
-                         <Link to={"/student/allstudents/" + classroom._id}><button className="btnregister" id="regsubmit">All Students</button></Link>
-                         <Link to={"/student/attendence/" + classroom._id}><button className="btnregister" id="regsubmit">Attendence</button></Link>
-                         <Link to={"/student/paymentstudent/" + classroom._id}><button className="btnregister" id="regsubmit">payment</button></Link>
+                         <Link to={"/user/addstudent/" + classroom._id}><button className="btnregister" id="regsubmit">Add Student</button></Link>&nbsp;
+                         <Link to={"/user/allstudents/" + classroom._id}><button className="btnregister" id="regsubmit">All Students</button></Link>&nbsp;
+                         <Link to={"/user/attendence/" + classroom._id}><button className="btnregister" id="regsubmit">Attendence</button></Link>&nbsp;
+                         <Link to={"/user/paymentstudent/" + classroom._id}><button className="btnregister" id="regsubmit">payment</button></Link>
                          </td>
                          
                         </tr>
