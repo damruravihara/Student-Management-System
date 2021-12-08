@@ -64,7 +64,7 @@ if(e!=null){
       grade,
       email}
 
-  axios.put(`http://localhost:8070/user/userupdate/${id}`,userupdate).then(()=>{
+  axios.put(`/user/userupdate/${id}`,userupdate).then(()=>{
 
 
     swal({          
