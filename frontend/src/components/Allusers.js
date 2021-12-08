@@ -23,8 +23,13 @@ export default function Allusers(){
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-    axios.delete(`http://localhost:8070/user/delete/${id}`).then(()=>{
-     
+    axios.delete(`/user/delete/${id}`).then(()=>{
+      axios.delete(`/student/deleteuserstudent/${id}`).then(()=>{
+        axios.delete(`/student/deleteallpayment/${id}`).then(()=>{
+          axios.delete(`/student/deleteuserabsent/${id}`).then(()=>{
+            axios.delete(`/student/deleteuserpresent/${id}`).then(()=>{
+              axios.delete(`/student/deleteuserclass/${id}`).then(()=>{
+          
         if (willDelete) {
           swal("The User has been deleted!", 
           {icon :"success",});  
@@ -33,6 +38,11 @@ export default function Allusers(){
            },1000);
         } else {
           swal("User Is Not Deleted");}
+      })
+    })
+    })
+  })
+    })
     });
   }
   })
@@ -90,12 +100,15 @@ const generatePDF = tickets => {
     <>
     <br/>
     <div className="container">
+    <br/>
+      <center><h1 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800"}}>All Users</h1></center>
+      <br/>
     <input className="search" type="text" placeholder="Search" aria-label="Search"  
       onChange={(e) => {
           setsearchTerm(e.target.value)
       }}/>
       <div className="reportbtn" style={{padding:"10px"}}>
-      <button type="button" className="btn btn-outline-info" onClick={() => generatePDF(user)}>GenerateReport</button>
+      <button type="button" className="btnregister" onClick={() => generatePDF(user)}>GenerateReport</button>
         </div>
         <br/><br/>
 

@@ -9,6 +9,7 @@ import man from "./Assets/man.png"
 import './profile.css'
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
  
 
 
@@ -33,6 +34,40 @@ const Profile = props=>{
     fetchUser();
   },[]);
 
+  const deleteUser=(id) =>{
+    swal({
+        title: "Are you sure?",
+        text: "Your Account Will be permenatly remove from System",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+    axios.delete(`/user/delete/${id}`).then(()=>{
+      axios.delete(`/student/deleteuserstudent/${id}`).then(()=>{
+        axios.delete(`/student/deleteallpayment/${id}`).then(()=>{
+          axios.delete(`/student/deleteuserabsent/${id}`).then(()=>{
+            axios.delete(`/student/deleteuserpresent/${id}`).then(()=>{
+              axios.delete(`/student/deleteuserclass/${id}`).then(()=>{
+          
+        if (willDelete) {
+          swal("The User has been deleted!", 
+          {icon :"success",});  
+          setTimeout(function(){
+          window.location.reload();
+           },1000);
+        } else {
+          swal("User Is Not Deleted");}
+      })
+    })
+    })
+  })
+    })
+    });
+  }
+  })
+} 
+
   return(
     <>
     <br/>
@@ -42,7 +77,7 @@ const Profile = props=>{
 
         <div className="profile">
           <div className="image">
-          {user.gender==="Female"?<center><img src={women}  width="200" height="200"></img></center>:user.gender==="male"?<center><img src={man}  width="200" height="200"></img></center>:<center><img src={profile}  width="200" height="200"></img></center>}
+          {user.gender==="Female"?<center><img src={women}  width="200" height="200"></img></center>:user.gender==="Male"?<center><img src={man}  width="200" height="200"></img></center>:<center><img src={profile}  width="200" height="200"></img></center>}
           <center><h2 style={{fontFamily:"be vietnam" , fontSize:"30px" , fontWeight:"800" , marginTop:"20px"}}>{user.name}</h2></center>
           <center><h6>{user.email}</h6></center>
           </div>
@@ -62,11 +97,23 @@ const Profile = props=>{
               className="btn btn-outline-success" 
               >Update Profile</button> </Link> */}
       <div className="editbutton">     
-      <Link to={"/user/update/" + user._id}>
+      <div className="row">
+        <div className="col form-floating">
+          
+
+        <Link to={"/user/update/" + user._id}>
       <IconButton aria-label="delete">
                          <EditIcon fontSize="medium" color="primary"/> 
                          </IconButton></Link>
-                         </div>  
+                         <IconButton aria-label="delete"  onClick={() =>  deleteUser(user._id)}>
+                         <DeleteForeverIcon fontSize="medium" color="secondary"/> 
+                         </IconButton> 
+
+        </div>
+      </div>
+                    
+    </div>  
+             
     </div>
     <br/>
 

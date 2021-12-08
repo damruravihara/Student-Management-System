@@ -45,6 +45,80 @@ export default function Viewpayment(){
     history.push(`/user/addpayment/${id}`);
   }
 
+  const deletePayment=(id) =>{
+    swal({
+        title: "Are you sure?",
+        text: "The Payment Will be removed from System",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+    axios.delete(`/student/deletepayment/${id}`).then(()=>{
+     
+        if (willDelete) {
+          swal("The Payment has been deleted!", 
+          {icon :"success",});  
+          setTimeout(function(){
+          window.location.reload();
+           },1000);
+        } else {
+          swal("Student Is Not Deleted");}
+    });
+  }
+  })
+}
+
+const deleteAll=(id) =>{
+  swal({
+      title: "Are you sure?",
+      text: "The all Payment Will be removed from System",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+  axios.delete(`/student/deleteallpayment/${id}`).then(()=>{
+   
+      if (willDelete) {
+        swal("The Payment has been deleted!", 
+        {icon :"success",});  
+        setTimeout(function(){
+        window.location.reload();
+         },1000);
+      } else {
+        swal("Student Is Not Deleted");}
+  });
+}
+})
+} 
+
+            //generate PDF
+            const generatePDF = tickets => {
+
+              const doc = new jspdf();
+              const tableColumn = ["Payment Date", "Month", "Special Note"];
+              const tableRows = [];
+          
+              tickets.map(ticket => {
+                  const ticketData = [
+                    ticket.currentDate,
+                    ticket.month,
+                    ticket.note  
+                  ];
+                  tableRows.push(ticketData);
+              })
+              doc.text(student.stname+"'s All Payment Details", 14, 15).setFontSize(12);
+              const date = Date().split(" ");
+      const dateStr = date[1] + "-" + date[2] + "-" + date[3];
+              // right down width height
+              // doc.addImage(img, 'JPEG', 190, 5, 15, 15);
+              // doc.addImage(img, 'JPEG', 170, 8, 25, 15);
+              doc.autoTable(tableColumn, tableRows, { styles: { fontSize: 8, }, startY: 35 });
+              doc.text(`Report Genarated Date - ${dateStr}`, 14, 23);
+              doc.save(`${student.name}payments.pdf`);
+            };
+
   return(
     <>
     <br/>
@@ -57,8 +131,14 @@ export default function Viewpayment(){
           setsearchTerm(e.target.value)
       }}/>
       <br/>
-      <div style={{padding:"5px"}}></div>
-      <button className="btnregister" id="regsubmit" onClick={addpayment}>Add Payment</button>
+      <div className="row" style={{padding:"10px"}}>
+          <div className="col form-floating">
+      <button type="button" className="btnregister" onClick={() => generatePDF(payment)}>GenerateReport</button>&nbsp;&nbsp;
+
+      <button className="btnregister" id="regsubmit" onClick={addpayment}>Add Payment</button>&nbsp;&nbsp;
+      <button onClick={() => deleteAll(student._id)} className="btnregister" id="regsubmit">Delete All Attendence</button>
+      </div>  
+      </div> 
       <br/><br/>
       <table className="table table-bordered table-hover">
           <thead>
@@ -89,9 +169,9 @@ export default function Viewpayment(){
                           <IconButton aria-label="delete">
                          <EditIcon fontSize="small" color="primary"/> 
                          </IconButton></Link> */}
-                         {/* <IconButton aria-label="delete"  onClick={() =>deleteStudent(payment._id)}>
+                         <IconButton aria-label="delete"  onClick={() =>deletePayment(payment._id)}>
                          <DeleteForeverIcon fontSize="small" color="secondary"/> 
-                         </IconButton> */}
+                         </IconButton>
                          {/* <Link to={"/student/addstudent/" + classroom._id}><button className="btnregister" id="regsubmit">Add Student</button></Link> */}
                          </td>
                          

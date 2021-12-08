@@ -68,7 +68,7 @@ export default function Updatestudentprofile(){
   text: "Student Successfully Updated",
   icon: "success",
   button: "Ok",
-});history.push('/user/allstudents/' +student.classId);
+});history.push('/user/studentprofile/' +student._id);
     }).catch((e)=>{
        swal("Please fill Form correctly " +e);
       })

@@ -60,7 +60,7 @@ function App() {
         <Route path="/user/paymentstudent/:id" component={Paymentstudent}/>
         <Route path="/user/addpayment/:id" component={Addpayment}/>
         <Route path="/user/historyatten/:id" component={Attendencehistory}/>
-        <Route path="/user/mystudents" component={Mystudents}/>
+        <Route path="/user/mystudents/:id" component={Mystudents}/>
         <Route path="/user/studentprofile/:id" component={Studentprofile}/>
         <Route path="/user/updatestdprofile/:id" component={Updatestudentprofile}/>
       </div>

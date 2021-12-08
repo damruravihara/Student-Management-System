@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from "react";
 import axios from "axios";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory, Link, useParams } from "react-router-dom";
 import swal from "sweetalert";
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
@@ -15,6 +15,7 @@ export default function Mystudents(){
   const [searchTerm, setsearchTerm] = useState("");
   const [student, setStudent] = useState([]);
   const [user, setUser] = useState([]);
+  const{ id } = useParams();
 
 
   useEffect(()=>{
@@ -28,7 +29,7 @@ export default function Mystudents(){
 
   useEffect(()=>{
     const getStudent = async()=>{
-     const res = await axios.get(`/student/mystudents`).then((res)=>{
+     const res = await axios.get(`/student/mystudents/${id}`).then((res)=>{
       setStudent(res.data);
       }).catch(()=>{
         history.push(path);

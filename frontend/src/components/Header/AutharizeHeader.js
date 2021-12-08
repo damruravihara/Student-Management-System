@@ -65,7 +65,7 @@ return(
       <Link to="/user"><li className="nav-item nav-link active">Home</li></Link>
       <Link to="/user/profile"><li className="nav-item nav-link">My Profile</li></Link>
       <Link to="/user/allclasses"><li className="nav-item nav-link">My Classes</li></Link>
-      <Link to="/user/mystudents"><li className="nav-item nav-link">My Students</li></Link>
+      <Link to={"/user/mystudents/"+user._id}><li className="nav-item nav-link">My Students</li></Link>
       {
         user.role ==="admin" ? 
         <Link to="/user/alluser"><li className="nav-item nav-link">All Users</li></Link> : null
