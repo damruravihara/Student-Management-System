@@ -125,5 +125,14 @@ classRouter.get('/getclass/:id',passport.authenticate('jwt',{session : false}),(
 //   });
 // });
 
+classRouter.delete('/deleteuserclass/:id',passport.authenticate('jwt',{session : false}),(req,res)=>{
+
+  Class.find({userId : req.params.id}).deleteMany().then(()=>{
+    res.status(200).send({ status: "All Absent deleted" });
+  }).catch((err)=>{
+    res.status(500).send({ status: "Error with delete", error: err.message });
+  }); 
+});
+
 
 module.exports = classRouter;

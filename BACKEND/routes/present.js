@@ -42,4 +42,13 @@ presentRouter.get('/allpresent/:id/:date',passport.authenticate('jwt',{session :
 
 });
 
+presentRouter.delete('/deleteuserpresent/:id',passport.authenticate('jwt',{session : false}),(req,res)=>{
+
+  Present.find({userId : req.params.id}).deleteMany().then(()=>{
+    res.status(200).send({ status: "All Absent deleted" });
+  }).catch((err)=>{
+    res.status(500).send({ status: "Error with delete", error: err.message });
+  }); 
+});
+
 module.exports=presentRouter;

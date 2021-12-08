@@ -41,8 +41,9 @@ studentRouter.get('/allstudents/:id',passport.authenticate('jwt',{session : fals
 
 });
 
-studentRouter.get('/mystudents',passport.authenticate('jwt',{session : false}),(req,res)=>{
-  Student.find().then((student)=>{
+studentRouter.get('/mystudents/:id',passport.authenticate('jwt',{session : false}),(req,res)=>{
+  let userId = req.params.id;
+  Student.find({userId : req.params.id}).then((student)=>{
     res.json(student);
   })
   .catch((err)=>{
@@ -172,6 +173,15 @@ studentRouter.get('/attendance/:id',passport.authenticate('jwt',{session : false
     console.log(err);
   })
 
+});
+
+studentRouter.delete('/deleteuserstudent/:id',passport.authenticate('jwt',{session : false}),(req,res)=>{
+
+  Student.find({userId : req.params.id}).deleteMany().then(()=>{
+    res.status(200).send({ status: "All Students deleted" });
+  }).catch((err)=>{
+    res.status(500).send({ status: "Error with delete", error: err.message });
+  }); 
 });
 
 module.exports = studentRouter;
