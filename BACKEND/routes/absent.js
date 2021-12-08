@@ -35,4 +35,13 @@ absentRouter.get('/allabsent/:id/:date',passport.authenticate('jwt',{session : f
 
 });
 
+absentRouter.delete('/deleteuserabsent/:id',passport.authenticate('jwt',{session : false}),(req,res)=>{
+
+  Absent.find({userId : req.params.id}).deleteMany().then(()=>{
+    res.status(200).send({ status: "All Absent deleted" });
+  }).catch((err)=>{
+    res.status(500).send({ status: "Error with delete", error: err.message });
+  }); 
+});
+
 module.exports= absentRouter;

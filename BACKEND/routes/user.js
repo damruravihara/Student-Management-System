@@ -14,7 +14,6 @@ const signToken = userID => {
 }
 
 userRouter.route('/Tregister').post((req,res)=>{
-
   const {name,address,contactno,gender,institute,qulification,subject,grade,email,username,password} = req.body;
   role = "user";
 
@@ -119,7 +118,8 @@ userRouter.get('/userprofile',passport.authenticate('jwt',{session : false}),(re
    .catch(err => res.status(404).json(err));  
 });
 
-userRouter.route("/userupdate/:id").put(async(req,res)=>{
+
+userRouter.put('/userupdate/:id',passport.authenticate('jwt',{session : false}),(req,res)=>{
   let userID = req.params.id;
   //const supplier = await Supplier.findById(req.user._id);
   //destructor
@@ -136,15 +136,14 @@ userRouter.route("/userupdate/:id").put(async(req,res)=>{
     grade,
     email
   }
-  try{
-      await User.findByIdAndUpdate(userID,updateUser).exec();
-      res.status(200).send({status:"User updated"})
-  }
-  catch(err){
-      res.status(500).send({status:"Error with updating data", error: err.message});
-  }
+     const update = User.findByIdAndUpdate(userID,updateUser).then(() =>{
+      res.status(200).send({status: "User updated"})
+  }).catch((err) =>{
+      console.log(err);
+      res.status(500).send({status: "Error with updating data",error: err.message})
+  });
   
-})
+});
 
 userRouter.get('/alluser',passport.authenticate('jwt',{session:false}),(req,res)=>{
   if(req.user.role === 'admin'){
@@ -159,18 +158,15 @@ userRouter.get('/alluser',passport.authenticate('jwt',{session:false}),(req,res)
   
 });
 
-userRouter.route("/delete/:id").delete(async(req,res)=>{
+userRouter.delete('/delete/:id',passport.authenticate('jwt',{session : false}),(req,res)=>{
   let id = req.params.id;
 
-
-  try {
-      await User.findByIdAndRemove(id).exec();
-      res.send('Succesfully Deleted')
-
-    } catch (error) {
-        console.log(error);
-        
-    }
+      User.findByIdAndRemove(id).then(()=>{
+        res.status(200).send({ status: "User deleted" });
+      })
+      .catch((err)=>{
+        res.status(500).send({ status: "Error with delete", error: err.message });
+      });
 });
 
 module.exports = userRouter;
